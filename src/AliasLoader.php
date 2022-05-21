@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Anything;
 
 use Illuminate\Foundation\AliasLoader as OriginalAliasLoader;
 
@@ -49,13 +49,13 @@ class AliasLoader extends OriginalAliasLoader
 			$content = str_replace(
 				'class AnythingBuilder',
 				'class AnythingBuilder_' . $alias_without_backslashes,
-				file_get_contents(app_path('AnythingBuilder.php'))
+				file_get_contents(__DIR__ . '/AnythingBuilder.php')
 			);
 			$path = storage_path('framework/cache/AnythingBuilder_' . $alias_without_backslashes . '.php');
 			file_put_contents($path, $content);
 
 			require_once $path;
-			class_alias('\App\AnythingBuilder_' . $alias_without_backslashes, $alias);
+			class_alias('\Anything\AnythingBuilder_' . $alias_without_backslashes, $alias);
 		}		
     }
 

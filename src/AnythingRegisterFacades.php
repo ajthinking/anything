@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace Anything;
 
-use App\AnythingAliasLoader as AliasLoader;
+use Anything\AliasLoader;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\PackageManifest;
 use Illuminate\Support\Facades\Facade;

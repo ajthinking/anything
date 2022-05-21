@@ -10,7 +10,7 @@ class OffCommand extends Command
     protected $signature = 'anything:off';
     protected $description = 'Reverts anything mode by restoring bootstrap/app.php';
 	public $defaultKernel = \App\Console\Kernel::class;
-	public $anythingKernel = \App\AnythingConsoleKernel::class;
+	public $anythingKernel = \Anything\ConsoleKernel::class;
 
     public function handle()
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Anything;
 
 use Archetype\Facades\PHPFile;
 use Illuminate\Support\Str;
@@ -32,45 +32,45 @@ class AnythingBuilder
 
 	public function build()
 	{
-		$file = PHPFile::make()->class($this->trueName())
-			->astQuery()
-			->class();
-		
-		foreach($this->stack as $call) {
-			$file->insertStmt(
-				(new BuilderFactory)->method($call[0])
-					->makePublic()
-					->setReturnType('self')
-					->getNode()
-			);
-		}
-
-		$file->commit()->end()->render();
+		$this->toPHPFile()->save();
 	}
 
 	public function trueName()
 	{
 		return Str::of(get_class($this))
-			->replaceFirst('App\AnythingBuilder_', '')
+			->replaceFirst('Anything\AnythingBuilder_', '')
 			->replace('_', '\\')
 			->toString();
 	}
 
+	public function toPHPFile()
+	{
+		return PHPFile::make()->class($this->trueName())
+			->astQuery()
+			->class()
+			->insertStmts(
+				collect($this->stack)
+					->map(fn($call) => $this->methodAst(...$call))
+					->toArray()
+			)
+			->commit()
+			->end();
+	}
+
 	public function __toString()
 	{
-		$file = PHPFile::make()->class($this->trueName())
-			->astQuery()
-			->class();
-		
-		foreach($this->stack as $call) {
-			$file->insertStmt(
-				(new BuilderFactory)->method($call[0])
-					->makePublic()
-					->setReturnType('self')
-					->getNode()
-			);
-		}
+		return $this->toPHPFile()->render();
+	}
 
-		return $file->commit()->end()->render();
+	protected function methodAst($name, $args)
+	{
+		return (new BuilderFactory)->method($name)
+			->makePublic()
+			->addStmt(
+				new \PhpParser\Node\Stmt\Return_(
+					new \PhpParser\Node\Expr\Variable('this')
+				)				
+			)
+			->getNode();
 	}
 }

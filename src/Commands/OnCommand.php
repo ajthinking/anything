@@ -11,7 +11,7 @@ class OnCommand extends Command
     protected $description = 'Allow anything mode by modifying bootstrap/app.php';
 	protected $alreadyInAnythingMode = 'Could not find the defult console kernel in bootstrap/app.php. Already in Anything mode?';
 	public $defaultKernel = \App\Console\Kernel::class;
-	public $anythingKernel = \App\AnythingConsoleKernel::class;
+	public $anythingKernel = \Anything\ConsoleKernel::class;
 
     public function handle()
     {
