@@ -33,6 +33,8 @@ class AnythingBuilder
 	public function build()
 	{
 		$this->toPHPFile()->save();
+
+		return 'Success!';
 	}
 
 	public function trueName()
