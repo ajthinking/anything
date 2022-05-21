@@ -16,7 +16,7 @@ composer require ajthinking/anything
 
 
 ## Usage
-First, we need to turn anything mode **on**:
+First, we need to turn *anything mode* **on**:
 ```bash
 php artisan anything:on
 ```
@@ -61,7 +61,7 @@ class Git
 }
 ```
 
-If referenced statically like above we will also create a facade:
+If referenced statically like above we will also create a register a facade:
 
 ```php
 class SomeFacade {
