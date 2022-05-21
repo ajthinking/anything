@@ -1,11 +1,12 @@
-# Anything! Build builders :face_with_spiral_eyes:
+# *Anything!* 💫
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/ajthinking/anything.svg?style=flat-square)](https://packagist.org/packages/ajthinking/anything)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/ajthinking/anything/run-tests?label=tests)](https://github.com/ajthinking/anything/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/ajthinking/anything/Check%20&%20fix%20styling?label=code%20style)](https://github.com/ajthinking/anything/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/ajthinking/anything.svg?style=flat-square)](https://packagist.org/packages/ajthinking/anything)
 
-Imagine public API:s and make them happen. Have fun!
+Imagine public API:s and make it so - a TDD and sketch toy for Laravel projects :star_struck:
+
 
 ## Installation
 
@@ -15,7 +16,7 @@ composer require ajthinking/anything
 
 
 ## Usage
-First we tell Laravel to handle all unknown classes by running
+First, we need to turn anything mode **on**:
 ```bash
 php artisan anything:on
 ```
@@ -75,9 +76,6 @@ it('can test', function() {
 	// TODO
 })
 ```
-
-## Configure
-`// Todo`
 
 ## License
 
