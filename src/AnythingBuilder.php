@@ -2,13 +2,12 @@
 
 namespace Anything;
 
-use Archetype\Facades\PHPFile;
-use Illuminate\Support\Str;
-use PhpParser\BuilderFactory;
+use Anything\Generators\ClassGenerator;
+use Facades\Illuminate\Support\Str;
 
 class AnythingBuilder
 {
-	protected $stack = [];
+	public $stack = [];
 
 	public static function __callStatic($method, $args)
 	{
@@ -32,7 +31,7 @@ class AnythingBuilder
 
 	public function build()
 	{
-		$this->toPHPFile()->save();
+		(new ClassGenerator($this->trueName(), $this->stack))->build();
 
 		return 'Success!';
 	}
@@ -43,36 +42,5 @@ class AnythingBuilder
 			->replaceFirst('Anything\AnythingBuilder_', '')
 			->replace('_', '\\')
 			->toString();
-	}
-
-	public function toPHPFile()
-	{
-		return PHPFile::make()->class($this->trueName())
-			->astQuery()
-			->class()
-			->insertStmts(
-				collect($this->stack)
-					->map(fn($call) => $this->methodAst(...$call))
-					->toArray()
-			)
-			->commit()
-			->end();
-	}
-
-	public function __toString()
-	{
-		return $this->toPHPFile()->render();
-	}
-
-	protected function methodAst($name, $args)
-	{
-		return (new BuilderFactory)->method($name)
-			->makePublic()
-			->addStmt(
-				new \PhpParser\Node\Stmt\Return_(
-					new \PhpParser\Node\Expr\Variable('this')
-				)				
-			)
-			->getNode();
 	}
 }
