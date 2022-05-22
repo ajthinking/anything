@@ -82,6 +82,8 @@ it('can test', function() {
 - [ ] Allow anything mode to modify CreatesApplication
 - [ ] Consider if setting facadeNamespace = 'App' essentially does the same thing as the AliasLoader
 - [ ] Instead of all guard clauses in AliasLoader, restrict to a configured namespace to create in
+- [ ] Implement the FacadeGenerator
+- [ ] Implement the TestGenerator
 
 ## License
 
