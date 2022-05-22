@@ -18,6 +18,8 @@ class ClassGenerator
 	public function build()
 	{
 		$this->toFile()->save();
+
+		// Delete file in storage/framework/cache now!
 	}
 
 	public function toFile()
