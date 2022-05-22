@@ -36,16 +36,15 @@ class AliasLoader extends OriginalAliasLoader
             return class_alias($this->aliases[$alias], $alias);
         }
 
+		if(array_key_exists($alias, $this->classmap)) return;
 		if(class_exists($alias)) return;
 		if(interface_exists($alias)) return;
 		if(trait_exists($alias)) return;
-		if(str_starts_with($alias, '_PhpScoperc')) return;
-		if(str_starts_with($alias, 'Symfony')) return;
-		if(str_starts_with($alias, 'Tinkerwell')) return;
-		if(str_starts_with($alias, 'Doctrine')) return;
-		if(str_starts_with($alias, 'Laravel\Dusk')) return;
-
-		if(!array_key_exists($alias, $this->classmap)) {
+		
+		if(str_starts_with($alias, 'App\\')) {
+			$path = str_replace('\\', DIRECTORY_SEPARATOR, $alias);
+			if(is_file($path) || is_dir($path)) return;
+			
 			$alias_without_backslashes = str_replace('\\', '_', $alias);
 			$content = str_replace(
 				'class AnythingBuilder',
@@ -57,7 +56,7 @@ class AliasLoader extends OriginalAliasLoader
 
 			require_once $path;
 			class_alias('\Anything\AnythingBuilder_' . $alias_without_backslashes, $alias);
-		}		
+		}
     }
 
     /**

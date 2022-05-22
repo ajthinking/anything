@@ -78,11 +78,9 @@ it('can test', function() {
 ```
 ## TODO
 - [ ] Ensure existing App files are loaded if they do exist
-- [x] Prevent from crashing when pest is installed
 - [ ] Find out why Pest does not respect the passed Kernel
 - [ ] Allow anything mode to modify CreatesApplication
 - [ ] Consider if setting facadeNamespace = 'App' essentially does the same thing as the AliasLoader
-- [ ] Instead of all guard clauses in AliasLoader, restrict to a configured namespace to create in
 - [ ] Implement the FacadeGenerator
 - [ ] Implement the TestGenerator
 
