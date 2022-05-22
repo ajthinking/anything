@@ -11,7 +11,7 @@ Imagine public API:s and make it so - a TDD and sketch toy for Laravel projects 
 ## Installation
 
 ```bash
-composer require ajthinking/anything
+composer require ajthinking/anything --dev
 ```
 
 
