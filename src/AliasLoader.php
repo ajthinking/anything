@@ -43,7 +43,7 @@ class AliasLoader extends OriginalAliasLoader
 		if(str_starts_with($alias, 'Symfony')) return;
 		if(str_starts_with($alias, 'Tinkerwell')) return;
 		if(str_starts_with($alias, 'Doctrine')) return;
-		if(str_starts_with($alias, 'Pest')) return;
+		if(str_starts_with($alias, 'Laravel\Dusk')) return;
 
 		if(!array_key_exists($alias, $this->classmap)) {
 			$alias_without_backslashes = str_replace('\\', '_', $alias);
