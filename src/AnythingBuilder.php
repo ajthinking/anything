@@ -3,6 +3,7 @@
 namespace Anything;
 
 use Anything\Generators\ClassGenerator;
+use Anything\Generators\FacadeGenerator;
 use Facades\Illuminate\Support\Str;
 
 class AnythingBuilder
@@ -12,6 +13,7 @@ class AnythingBuilder
 	public static function __callStatic($method, $args)
 	{
 		$instance = new static;
+
 		array_push($instance->stack, [$method, $args]);
 
 		return $instance;
@@ -32,6 +34,7 @@ class AnythingBuilder
 	public function build()
 	{
 		(new ClassGenerator($this->trueName(), $this->stack))->build();
+		// (new FacadeGenerator($this->trueName(), $this->stack))->build();
 
 		return 'Success!';
 	}
