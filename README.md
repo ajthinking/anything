@@ -77,6 +77,7 @@ it('can test', function() {
 })
 ```
 ## TODO
+- [ ] Ensure existing App files are loaded if they do exist (both static and on instance)
 - [ ] Find out why Pest does not respect the passed Kernel
 - [ ] Allow anything mode to modify CreatesApplication
 - [ ] Consider if setting facadeNamespace = 'App' essentially does the same thing as the AliasLoader
