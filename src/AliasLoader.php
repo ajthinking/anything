@@ -42,7 +42,9 @@ class AliasLoader extends OriginalAliasLoader
 		if(trait_exists($alias)) return;
 		
 		if(str_starts_with($alias, 'App\\')) {
-			$path = base_path(str_replace('\\', DIRECTORY_SEPARATOR, $alias));
+			$relative = str_replace('\\', DIRECTORY_SEPARATOR, lcfirst($alias)) . '.php';
+			$path = base_path($relative);
+
 			if(is_file($path) || is_dir($path)) return;
 			
 			$alias_without_backslashes = str_replace('\\', '_', $alias);
