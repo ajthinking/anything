@@ -8,13 +8,15 @@ use Facades\Illuminate\Support\Str;
 
 class AnythingBuilder
 {
+	public $staticAccess;
+
 	public $stack = [];
 
 	public static function __callStatic($method, $args)
 	{
 		$instance = new static;
 
-		array_push($instance->stack, [$method, $args]);
+		$instance->staticAccess = [$method, $args];
 
 		return $instance;
 	}	
@@ -33,10 +35,41 @@ class AnythingBuilder
 
 	public function build()
 	{
-		(new ClassGenerator($this->trueName(), $this->stack))->build();
-		// (new FacadeGenerator($this->trueName(), $this->stack))->build();
+		return $this->isFacadeAccess()
+			? $this->buildFacadeAndClass()
+			: $this->buildClass();
+	}
+
+	protected function isFacadeAccess()
+	{
+		return $this->staticAccess && str_contains($this->trueName(), 'Facades\\');
+	}
+
+	protected function buildClass()
+	{
+		(new ClassGenerator(
+			$this->trueName(),
+			$this->staticAccess,
+			$this->stack
+		))->build();
 
 		return 'Success!';
+	}
+
+	protected function buildFacadeAndClass()
+	{
+		(new FacadeGenerator($this->trueName(), $this->guessFacadeTargetName()))->build();
+
+		(new ClassGenerator(
+			$this->guessFacadeTargetName(),
+			[],
+			[$this->staticAccess, ...$this->stack]
+		))->build();
+	}
+
+	protected function guessFacadeTargetName()
+	{
+		return str_replace('Facades\\', '', $this->trueName());
 	}
 
 	public function trueName()

@@ -9,39 +9,15 @@ class FacadeGenerator
 {
 	protected $stack = [];
 
-	public function __construct($name, $stack)
+	public function __construct(string $name, string $target)
 	{
 		$this->name = $name;
-		$this->stack = $stack;
+		$this->target = $target;
 	}
 
 	public function build()
 	{
-		$this->saveFacade();
-		$this->registerFacade();
-	}
-
-	protected function saveFacade()
-	{
 		$this->toFile()->save();
-	}
-
-	protected function registerFacade()
-	{
-		PHPFile::load('app/Providers/AppServiceProvider.php')->astQuery()
-			->classMethod()
-			->where('name->name->name', 'register')
-			->insertStmt($this->appBindingAST())
-			->commit()
-			->end()
-			->save();
-	}
-
-	protected function appBindingAST()
-	{
-		return new \PhpParser\Node\Stmt\Return_(
-			new \PhpParser\Node\Expr\Variable('jerryBoi')
-		);
 	}
 
 	public function toFile()
@@ -57,7 +33,7 @@ class FacadeGenerator
 					->makeProtected()
 					->addStmt(
 						new \PhpParser\Node\Stmt\Return_(
-							new \PhpParser\Node\Scalar\String_($this->name)
+							new \PhpParser\Node\Scalar\String_($this->target)
 						)
 					)
 					->getNode()				
