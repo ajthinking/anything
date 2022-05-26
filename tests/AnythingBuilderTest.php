@@ -27,13 +27,14 @@ it('can get true name', function () {
 	);
 });
 
-it('accumulates method calls and property access', function () {
+it('accumulates statci access, method calls and property access', function () {
 	$instance = AnythingBuilder::a()->b(123)->c;
+
+	assertEquals($instance->staticAccess, ['a', []]);
 
 	assertEquals(
 		$instance->stack,
 		[
-			['a',[]],
 			['b',[123]],
 			'c',
 		]
