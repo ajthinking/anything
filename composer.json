@@ -1,0 +1,60 @@
+{
+    "name": "ajthinking/anything",
+    "description": "Create code by imagining public apis",
+    "keywords": [
+        "ajthinking",
+        "laravel",
+        "anything"
+    ],
+    "homepage": "https://github.com/ajthinking/anything",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anders Jurisoo",
+            "email": "jurisoo@hotmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "ajthinking/archetype": "^1.1"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^7.0",
+        "pestphp/pest": "^1.21",
+        "pestphp/pest-plugin-laravel": "^1.1",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Anything\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Anything\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Anything\\AnythingServiceProvider"
+            ],
+            "aliases": {
+                "Anything": "Anything\\Facades\\Anything"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
