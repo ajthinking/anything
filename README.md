@@ -7,6 +7,7 @@
 
 Imagine public API:s and make it so - a TDD and sketch toy for Laravel projects :star_struck:
 
+![github_readme_gif](https://user-images.githubusercontent.com/3457668/171365478-c621c14b-1d98-4ede-ad93-a92723e6ff31.gif)
 
 ## Getting started
 
